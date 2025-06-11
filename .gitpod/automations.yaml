@@ -1,0 +1,40 @@
+services:
+    android_emulator:
+        name: Android Emulator
+        commands:
+            start: |
+                echo "Starting Android Emulator..."
+                adb start-server
+                emulator -avd headless_avd -port 5554 -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -accel on -no-metrics       
+            ready: adb shell getprop sys.boot_completed 2>/dev/null | grep -q 1
+            stop: |
+                # adb -s emulator-5554 emu kill; adb kill-server
+                PID=$(pgrep -f 'qemu-system-x86_64-headless -avd headless_avd -port 5554')
+                test -z "$PID" && echo "Emulator process not found" && exit 1
+
+                kill -SIGINT "$PID"
+                while kill -0 "$PID" 2>/dev/null; do
+                    sleep 1
+                done
+
+                echo "Emulator process $PID has exited cleanly."
+        triggeredBy:
+          - postEnvironmentStart
+
+    emulator_control:
+        name: Emulator Control Web
+        commands:
+            start: |
+                until adb shell getprop sys.boot_completed 2>/dev/null | grep -q 1; do sleep 1; done
+                cd ~/ws-scrcpy/dist
+                node ./index.js
+        triggeredBy:
+          - postEnvironmentStart
+
+
+tasks:
+    adb_server:
+        name: ADB Server
+        command: adb start-server
+        triggeredBy:
+          - manual
