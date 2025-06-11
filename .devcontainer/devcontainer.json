@@ -29,5 +29,27 @@
   "mounts": [
         "source=/boot,target=/boot,type=bind",
         "source=/lib/modules,target=/lib/modules,type=bind"
-  ]
+  ],
+
+    "portsAttributes": {
+    "8000": {
+      "label": "Emulator Control Web",
+      "onAutoForward": "openPreview"
+    }
+},
+"customizations": {
+	"vscode": {
+		"extensions": [
+			"esafirm.kotlin-formatter",
+			"fwcd.kotlin",
+			"vscjava.vscode-gradle",
+			"vscjava.vscode-java-dependency",
+			"vscjava.vscode-java-test",
+			"vscjava.vscode-maven",
+			"vscjava.vscode-java-debug",
+			"redhat.java",
+			"VisualStudioExptTeam.vscodeintellicode"
+		]
+	}
+}
 }

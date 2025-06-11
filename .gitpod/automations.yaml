@@ -4,6 +4,7 @@ services:
         commands:
             start: |
                 echo "Starting Android Emulator..."
+                adb kill-server || :
                 adb start-server
                 emulator -avd headless_avd -port 5554 -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -accel on -no-metrics       
             ready: adb shell getprop sys.boot_completed 2>/dev/null | grep -q 1
@@ -24,12 +25,14 @@ services:
     emulator_control:
         name: Emulator Control Web
         commands:
+            ready: adb shell getprop sys.boot_completed 2>/dev/null | grep -q 1
             start: |
                 until adb shell getprop sys.boot_completed 2>/dev/null | grep -q 1; do sleep 1; done
                 cd ~/ws-scrcpy/dist
                 node ./index.js
         triggeredBy:
           - postEnvironmentStart
+    
 
 
 tasks:

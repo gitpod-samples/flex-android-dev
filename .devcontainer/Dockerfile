@@ -67,6 +67,6 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | sh \
 # Install ws-scrcpy
 SHELL ["/bin/bash", "-lic"]
 RUN fnm install --lts \
-    && cd $HOME && git clone https://github.com/NetrisTV/ws-scrcpy.git && cd ws-scrcpy \
+    && cd $HOME && git clone https://github.com/axonasif/ws-scrcpy && cd ws-scrcpy \
     && uv run npm install && npm run dist:prod
     # && uv run bun install && uv run bun run dist:prod

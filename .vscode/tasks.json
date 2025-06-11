@@ -1,0 +1,15 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build and launch apk",
+      "type": "shell",
+      "command": "./gradlew installDebug && adb shell monkey -p com.google.samples.apps.niacatalog -c android.intent.category.LAUNCHER 1",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
