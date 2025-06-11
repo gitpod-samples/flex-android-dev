@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Android App",
+      "type": "android",
+      "request": "launch",
+    //   "program": "${workspaceFolder}/app/build/outputs/apk/debug/app-debug.apk",
+      "preLaunchTask": "build and launch apk",
+    //   "stopAtEntry": false,
+    //   "cwd": "${workspaceFolder}",
+    //   "externalConsole": false
+    }
+  ]
+}
