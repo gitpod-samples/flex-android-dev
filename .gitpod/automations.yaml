@@ -4,8 +4,10 @@ services:
         commands:
             start: |
                 echo "Starting Android Emulator..."
-                adb kill-server || :
-                adb start-server
+                for _ in {1..5}; do
+                    adb kill-server || :
+                    adb start-server && break
+                done
                 emulator -avd headless_avd -port 5554 -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -accel on -no-metrics       
             ready: adb shell getprop sys.boot_completed 2>/dev/null | grep -q 1
             stop: |
@@ -33,8 +35,6 @@ services:
         triggeredBy:
           - postEnvironmentStart
     
-
-
 tasks:
     adb_server:
         name: ADB Server
