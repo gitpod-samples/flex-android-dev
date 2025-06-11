@@ -48,7 +48,8 @@
 			"vscjava.vscode-maven",
 			"vscjava.vscode-java-debug",
 			"redhat.java",
-			"VisualStudioExptTeam.vscodeintellicode"
+			"VisualStudioExptTeam.vscodeintellicode",
+			"nisargjhaveri.android-debug"
 		]
 	}
 }
